@@ -51,3 +51,4 @@ var Ladder = class LadderJS {
     bodyMO.observe(document, { childList: true, subtree: true });
   }
 };
+window.ladder = new Ladder();

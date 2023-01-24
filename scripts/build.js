@@ -4,12 +4,13 @@ const options = {
 	format: 'cjs',
 
 	bundle: true,
-	treeShaking: false,
+	treeShaking: true,
 
 	entryPoints: [
 		"src/index.js",
 	]
 };
+
 
 await ESBuild.build({
 	...options,
@@ -21,4 +22,5 @@ await ESBuild.build({
 	minify: true,
 	outfile: "dist/ladder.min.js",
 });
-console.log("빌드 작업이 완료되었습니다!");
+
+console.log("Build Success!");
