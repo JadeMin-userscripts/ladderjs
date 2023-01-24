@@ -34,24 +34,24 @@ window.Ladder = class LadderJS {
 	public setup(): void {
 		const headMO: MutationObserver = new MutationObserver((event: MutationRecord[]) => {
 			if(document.head) {
-				//this.#listeners.once.endHead.forEach(c=>c());
-				this.listeners.startHead.forEach(c=>c());
+				//this.#listeners.once.endHead.forEach(c=> c(event));
+				this.listeners.startHead.forEach(c=> c(event));
 				headMO.disconnect();
 			}
 		});
 		const bodyMO: MutationObserver = new MutationObserver((event: MutationRecord[]) => {
 			if(document.body) {
-				document.addEventListener("DOMContentLoaded", ()=> this.listeners.endBody.forEach(c=>c()));
+				document.addEventListener("DOMContentLoaded", _event=> this.listeners.endBody.forEach(c=> c(_event)));
 
-				this.listeners.startBody.forEach(c=>c());
+				this.listeners.startBody.forEach(c=> c(event));
 				bodyMO.disconnect();
 			}
 		});
-		headMO.observe(document, <MutationObserverInit>{
+		headMO.observe(document, {
 			childList: true,
 			subtree: true
 		});
-		bodyMO.observe(document, <MutationObserverInit>{
+		bodyMO.observe(document, {
 			childList: true,
 			subtree: true
 		});
