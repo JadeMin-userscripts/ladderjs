@@ -2,9 +2,9 @@
 	"ts-node": {
 		"esm": true,
 		"compilerOptions": {
-            "module": "NodeNext",
-            "target": "ESNext"
-        }
+			"module": "NodeNext",
+			"target": "ESNext"
+		}
 	},
 	"compilerOptions": {
 		"module": "NodeNext",
