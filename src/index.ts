@@ -17,9 +17,9 @@ window.Ladder = class LadderJS {
 			case StartEvents.head: {
 				this.listeners.startHead.push(callback); break;
 			};
-			case EndEvents.head: {
-				//this.listeners.endHead.push(callback); break;
-			};
+			/*case EndEvents.head: {
+				this.listeners.endHead.push(callback); break;
+			};*/
 			case StartEvents.body: {
 				this.listeners.startBody.push(callback); break;
 			};
