@@ -1,2 +1,2 @@
 # LadderJS
-A Tampermonkey library focused on manipulating DOM at "run-at: document-start" point.
+DOM manipulation library for Tampermonkey scripts that run-at "document-start".
