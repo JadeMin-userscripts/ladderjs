@@ -5,8 +5,7 @@
 	"version": "0.0.0",
 	"scripts": {
 		"esbuild": "node --no-warnings --experimental-vm-modules ./scripts/build.js",
-		"build:publish": "npm run esbuild publish",
-		"build:test": "npm run esbuild test"
+		"build": "npm run esbuild"
 	},
 	"devDependencies": {
 		"esbuild": "^0.17.4"

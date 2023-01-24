@@ -1,20 +1,24 @@
 import ESBuild from 'esbuild';
-import getBuildFor from "./types.js";
-const buildArgv = process.argv.slice(2)[0];
-const buildFor = getBuildFor(buildArgv);
-
-
-await ESBuild.build({
+const options = {
 	platform: 'browser',
 	format: 'cjs',
 
 	bundle: true,
 	treeShaking: false,
-	minify: buildFor.PUBLISH,
 
 	entryPoints: [
 		"src/index.js",
-	],
-	outdir: "dist/"
+	]
+};
+
+await ESBuild.build({
+	...options,
+	minify: false,
+	outfile: "dist/ladder.js",
 });
-console.log(`${buildArgv} - 빌드 작업이 완료되었습니다!`);
+await ESBuild.build({
+	...options,
+	minify: true,
+	outfile: "dist/ladder.min.js",
+});
+console.log("빌드 작업이 완료되었습니다!");
