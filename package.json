@@ -1,13 +1,13 @@
 {
 	"private": true,
 	"type": "module",
-	"name": "ladderjs",
 	"version": "0.0.0",
 	"scripts": {
-		"esbuild": "node --no-warnings --experimental-vm-modules ./scripts/build.js",
+		"esbuild": "ts-node --esm ./scripts/build.ts",
 		"build": "npm run esbuild"
 	},
 	"devDependencies": {
-		"esbuild": "^0.17.4"
+		"esbuild": "^0.17.4",
+		"ts-node": "^10.9.1"
 	}
 }
