@@ -1,10 +1,10 @@
 import { 
-	CommonOptions, BuildOptions,
+	BuildOptions,
 	build,
 } from 'esbuild';
 const minOptions: BuildOptions = {
-	platform: 'browser',
-	format: 'cjs',
+	platform: "browser",
+	format: "esm",
 
 	bundle: true,
 	treeShaking: true,
@@ -13,14 +13,14 @@ const minOptions: BuildOptions = {
 };
 
 
-await build({
+await build(<BuildOptions>{
 	...minOptions,
 	sourcemap: 'inline',
-
+	
 	minifySyntax: true,
 	outfile: "dist/ladder.js",
-})
-await build({
+});
+await build(<BuildOptions>{
 	...minOptions,
 	
 	minify: true,

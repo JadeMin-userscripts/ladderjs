@@ -4,7 +4,7 @@ import {
 } from "./types.js";
 
 
-window.Ladder = class LadderJS {
+globalThis.LadderJS = class {
 	private listeners: Listeners = {
 		startHead: [],
 		endHead: [],
