@@ -13,14 +13,14 @@ const minOptions: BuildOptions = {
 };
 
 
-await build(<BuildOptions>{
+await build({
 	...minOptions,
 	sourcemap: 'inline',
 	
 	minifySyntax: true,
 	outfile: "dist/ladder.js",
 });
-await build(<BuildOptions>{
+await build({
 	...minOptions,
 	
 	minify: true,

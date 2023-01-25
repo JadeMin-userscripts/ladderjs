@@ -1,15 +1,17 @@
 export enum StartEvents {
-	head = 'startHead',
-	body = 'startBody',
+	head = 'headStart',
+	body = 'bodyStart',
 };
 export enum EndEvents {
-	head = 'endHead',
-	body = 'endBody',
+	head = 'headEnd',
+	body = 'bodyEnd',
 };
-export type OnceCallback = {
-	(event: MutationRecord[] | Object): void;
-};
+
+
+export type AllEvents = StartEvents | EndEvents;
 export type Listeners = {
-	[key in StartEvents | EndEvents]: OnceCallback[];
+	[key in AllEvents]: Function[];
 };
-export type Events = StartEvents | EndEvents;
+
+
+export type HeadBodyElement = HTMLHeadElement | HTMLBodyElement;
