@@ -12,11 +12,14 @@ const exports = (() => {
 			this.#targetElement = defaultElement;
 		};
 
-		/*#createElement(tagName: string): HTMLStyleScriptElement {
-			return document.createElement(tagName) as HTMLStyleScriptElement;
-		};*/
+		#createElement(tagName: string): HTMLStyleScriptElement {
+			const element = document.createElement(tagName) as HTMLStyleScriptElement;
+			return Object.assign(element, {
+				append: ()=> this.#targetElement.appendChild(element),
+			});
+		};
 		public createStyle(options: StyleCreaterParams[]): HTMLElement {
-			const styleElement = document.createElement('style');
+			const styleElement = this.#createElement('style');
 			const result: string[] = [];
 			options.forEach(option => {
 				const styles = Object.entries(option.styles);
@@ -24,15 +27,15 @@ const exports = (() => {
 			});
 			styleElement.innerHTML = result.join('\n');
 
-			return this.#targetElement.appendChild(styleElement);
+			return styleElement;
 		};
 		public createScript(functions: Function[]): HTMLElement {
-			const scriptElement = document.createElement('script');
+			const scriptElement = this.#createElement('script');
 			const result: string[] = [];
 			result.push(...functions.map(toString));
 			scriptElement.innerHTML = result.join('\n');
 
-			return this.#targetElement.appendChild(scriptElement);
+			return scriptElement;
 		};
 	};
 	const LadderJS = class LadderJS {
