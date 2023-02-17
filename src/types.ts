@@ -18,7 +18,7 @@ export type HTMLHeadBodyElement = HTMLHeadElement | HTMLBodyElement;
 export type HTMLStyleScriptElement = HTMLStyleElement | HTMLScriptElement;
 export type StyleCreaterParams = {
 	selector: string,
-	css: {
+	style: {
 		[key: string]: string;
 	}
 };

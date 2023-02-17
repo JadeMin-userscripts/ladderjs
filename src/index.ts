@@ -22,8 +22,8 @@ const exports = (() => {
 			const styleElement = this.#createElement('style');
 			const result: string[] = [];
 			options.forEach(option => {
-				const css = Object.entries(option.css);
-				result.push(...css.map(([prop, value])=> `${option.selector}{${prop}:${value}!important;}`));
+				const style = Object.entries(option.style);
+				result.push(...style.map(([prop, value])=> `${option.selector}{${prop}:${value}!important;}`));
 			});
 			styleElement.innerHTML = result.join('\n');
 
