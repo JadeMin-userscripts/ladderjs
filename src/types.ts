@@ -1,10 +1,10 @@
-export enum StartEvents {
-	head = 'headStart',
-	body = 'bodyStart',
+export const enum StartEvents {
+	HEAD = 'headStart',
+	BODY = 'bodyStart',
 };
-export enum EndEvents {
-	head = 'headEnd',
-	body = 'bodyEnd',
+export const enum EndEvents {
+	HEAD = 'headEnd',
+	BODY = 'bodyEnd',
 };
 
 
@@ -14,4 +14,11 @@ export type Listeners = {
 };
 
 
-export type HeadBodyElement = HTMLHeadElement | HTMLBodyElement;
+export type HTMLHeadBodyElement = HTMLHeadElement | HTMLBodyElement;
+export type HTMLStyleScriptElement = HTMLStyleElement | HTMLScriptElement;
+export type StyleCreaterParams = {
+	selector: string,
+	styles: {
+		[key: string]: string;
+	}
+};

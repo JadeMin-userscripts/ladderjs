@@ -2,7 +2,8 @@ import {
 	BuildOptions,
 	build,
 } from 'esbuild';
-const minOptions: BuildOptions = {
+
+const defaultOption: BuildOptions = {
 	platform: "browser",
 	format: "esm",
 
@@ -14,17 +15,16 @@ const minOptions: BuildOptions = {
 
 
 await build({
-	...minOptions,
+	...defaultOption,
 	sourcemap: 'inline',
 	
 	minifySyntax: true,
 	outfile: "dist/ladder.js",
 });
 await build({
-	...minOptions,
+	...defaultOption,
 	
 	minify: true,
 	outfile: "dist/ladder.min.js",
 });
-
 console.log("Build Success!");

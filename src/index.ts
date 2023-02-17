@@ -1,35 +1,37 @@
 import {
-	HeadBodyElement,
+	HTMLHeadBodyElement, StyleCreaterParams, HTMLStyleScriptElement,
 	Listeners,
 	AllEvents, StartEvents, EndEvents,
 } from "./types.js";
 
 const exports = (() => {
 	const Liner = class Liner {
-		private targetDocument: HeadBodyElement;
-		public constructor(doc: HeadBodyElement) {
-			this.targetDocument = doc;
+		#targetElement: HTMLHeadBodyElement;
+		public constructor(private defaultElement: HTMLHeadBodyElement) {
+			this.#targetElement = defaultElement;
 		};
-	
-		public appendCSS(css: string|string[]): Element {
-			const styleElement: Element = document.createElement('style');
-			if(Array.isArray(css)) {
-				styleElement.innerHTML = css.join('\n');
-			} else {
-				styleElement.innerHTML = css;
-			}
-	
-			return this.targetDocument.appendChild(styleElement);
+
+		/*#createElement(tagName: string): HTMLStyleScriptElement {
+			return document.createElement(tagName) as HTMLStyleScriptElement;
+		};*/
+		public createStyle(options: StyleCreaterParams[]): HTMLElement {
+			const styleElement = document.createElement('style');
+			const result: string[] = [];
+			options.forEach(option => {
+				const styles = Object.entries(option.styles);
+				result.push(...styles.map(([prop, value])=> `${option.selector}{${prop}:${value}!important;}`));
+			});
+			styleElement.innerHTML = result.join('\n');
+
+			return this.#targetElement.appendChild(styleElement);
 		};
-		public appendScript(fn: Function|Function[]): Element {
-			const scriptElement: Element = document.createElement('script');
-			if(Array.isArray(fn)) {
-				scriptElement.innerHTML = fn.map(fn=> `(${fn})();`).join("\n");
-			} else {
-				scriptElement.innerHTML = `(${fn})();`;
-			}
-	
-			return this.targetDocument.appendChild(scriptElement);
+		public createScript(functions: Function[]): HTMLElement {
+			const scriptElement = document.createElement('script');
+			const result: string[] = [];
+			result.push(...functions.map(toString));
+			scriptElement.innerHTML = result.join('\n');
+
+			return this.#targetElement.appendChild(scriptElement);
 		};
 	};
 	const LadderJS = class LadderJS {
@@ -42,16 +44,16 @@ const exports = (() => {
 	
 		public once(eventName: AllEvents, callback: Function): void {
 			switch(eventName) {
-				case StartEvents.head: {
+				case StartEvents.HEAD: {
 					this.#listeners.headStart.push(callback); break;
 				};
-				/*case EndEvents.head: {
+				/*case EndEvents.HEAD: {
 					this.listeners.headEnd.push(callback); break;
 				};*/
-				case StartEvents.body: {
+				case StartEvents.BODY: {
 					this.#listeners.bodyStart.push(callback); break;
 				};
-				case EndEvents.body: {
+				case EndEvents.BODY: {
 					this.#listeners.bodyEnd.push(callback); break;
 				};
 				default: {
@@ -61,7 +63,7 @@ const exports = (() => {
 		};
 		public attach(): void {
 			const headMO = (): void => {
-				const observer: MutationObserver = new MutationObserver(() => {
+				const observer = new MutationObserver(() => {
 					if(document.head) {
 						const liner = new Liner(document.head);
 	
@@ -77,7 +79,7 @@ const exports = (() => {
 				});
 			};
 			const bodyMO = (): void => {
-				const observer: MutationObserver = new MutationObserver(() => {
+				const observer = new MutationObserver(() => {
 					if(document.body) {
 						const liner = new Liner(document.body);
 	
@@ -101,5 +103,6 @@ const exports = (() => {
 		LadderJS,
 	};
 })();
+globalThis.Liner = exports.Liner;
 globalThis.LadderJS = exports.LadderJS;
 globalThis.ladder = new globalThis.LadderJS();
