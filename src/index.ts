@@ -4,6 +4,7 @@ import {
 	AllEvents, StartEvents, EndEvents,
 } from "./types.js";
 
+
 const exports = (() => {
 	const Liner = class Liner {
 		#targetElement: HTMLHeadBodyElement;
@@ -103,6 +104,6 @@ const exports = (() => {
 		LadderJS,
 	};
 })();
-globalThis.Liner = exports.Liner;
+
 globalThis.LadderJS = exports.LadderJS;
 globalThis.ladder = new globalThis.LadderJS();
