@@ -16,7 +16,7 @@ const defaultOption: BuildOptions = {
 
 await build({
 	...defaultOption,
-	sourcemap: true,
+	sourcemap: 'inline',
 	
 	minifySyntax: true,
 	outfile: "dist/ladder.js",
