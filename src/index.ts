@@ -1,8 +1,9 @@
 import type {
 	HTMLHeadBodyElement, StyleCreaterParams, HTMLStyleScriptElement,
 	Listeners,
-	AllEvents, StartEvents, EndEvents,
+	AllEvents,
 } from "./types.js";
+import { StartEvents, EndEvents } from "./types.js";
 
 
 const exports = (() => {
@@ -12,12 +13,14 @@ const exports = (() => {
 			this.#targetElement = defaultElement;
 		};
 
+
 		#createElement(tagName: string): HTMLStyleScriptElement {
 			const element = document.createElement(tagName) as HTMLStyleScriptElement;
 			return Object.assign(element, {
 				append: ()=> this.#targetElement.appendChild(element),
 			});
 		};
+
 		public createStyle(options: StyleCreaterParams[]): HTMLElement {
 			const styleElement = this.#createElement('style');
 			const result: string[] = [];
@@ -29,6 +32,7 @@ const exports = (() => {
 
 			return styleElement;
 		};
+
 		public createScript(functions: Function[]): HTMLElement {
 			const scriptElement = this.#createElement('script');
 			const result: string[] = [];
@@ -46,6 +50,7 @@ const exports = (() => {
 			bodyEnd: []
 		};
 	
+
 		public once(eventName: AllEvents, callback: Function): void {
 			switch(eventName) {
 				case StartEvents.HEAD: {
@@ -65,6 +70,7 @@ const exports = (() => {
 				};
 			};
 		};
+
 		public attach(): void {
 			const headMO = (): void => {
 				const observer = new MutationObserver(() => {
@@ -97,7 +103,6 @@ const exports = (() => {
 					subtree: true
 				});
 			};
-	
 			return headMO();
 		};
 	};
