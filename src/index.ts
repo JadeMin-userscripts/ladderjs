@@ -1,4 +1,4 @@
-import {
+import type {
 	HTMLHeadBodyElement, StyleCreaterParams, HTMLStyleScriptElement,
 	Listeners,
 	AllEvents, StartEvents, EndEvents,
