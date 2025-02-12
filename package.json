@@ -6,7 +6,7 @@
 		"build": "npm run esbuild"
 	},
 	"devDependencies": {
-		"esbuild": "^0.17.4",
-		"tsx": "^3.12.3"
+		"esbuild": "^0.25.0",
+		"tsx": "^3.14.0"
 	}
 }
